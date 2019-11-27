@@ -1,2 +1,2 @@
 # Novych.cz
-Novych,cz - Personal web page
+Novych.cz - Personal web page
