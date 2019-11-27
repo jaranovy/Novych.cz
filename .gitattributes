@@ -3,6 +3,10 @@
 ###############################################################################
 * text=auto
 
+# Set language for GitHub
+*.pdf linguist-language=csharp
+*.docx linguist-language=csharp
+
 ###############################################################################
 # Set default behavior for command prompt diff.
 #
