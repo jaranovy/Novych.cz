@@ -1,0 +1,95 @@
+﻿@using Novych.Resources
+@using Novych.Models.ParniCistic
+
+@model CalendarModel
+
+@{
+    ViewBag.Title = "Parní čistič";
+    Layout = "~/Views/Shared/_LayoutParniCistic.cshtml";
+}
+
+<h2>Pronájem Parního Čističe - Kärcher SC 1020</h2>
+<div class="row">
+    <div class="col-md-6">
+        <p>Parní čistič Kärcher SC 1.020 je příruční výkonný čistič vhodný do domácnosti. Optimalizovaná podlahová hubice zaručuje idální výkon čištění, neboť nečistoty jsou pojímány celou plochou hubice.</p>
+        <p>Nádoba na vodu s objemem 1,2 l umožňuje uklidit celou domácnost pouze s několika málo pracovními pauzami. Díky maximálnímu tlaku 3,2 bar je zajištěn vysoký výstup páry. Usazeniny mastnot a ostatní pevně ulpívající nečistoty mohou být účinně a přitom ekologicky (bez použití chemie!) odstraněny. Množství páry může být regulováno na parní pistoli a být přizpůsobeno čištěnému povrchu a stupni znečištění.</p>
+        <p>Design byl koncipován tak, aby byl přístroj atraktivní na pohled a zároveň aby poskytoval vysoký komfort při práci. To se odráží například v lehce srozumitelných obslužných prvcích, zástrčném systému příslušenství, praktické parkovací pozici a velkých kolech pro snadnější potahování a velkou mobilitu paročističe. Přístroj je bezpečný vůči dětem, neboť patentovaný bezpečnostní uzávěr s přetlakovým ventilem lze otevřít teprve až tehdy, když parní kotel není pod tlakem.</p>
+        <p>
+            Kärcher SC 1020 je možné použít všude v domácnosti:
+            <ul type="disc">
+                <li>v kuchyni na dřez a linku</li>
+                <li>v koupelně na dlažbu a vanu</li>
+                <li>na skla nebo zrcadla</li>
+                <li>k čištění podlah</li>
+            </ul>
+        </p>
+    </div>
+
+    <div class="col-md-4">
+        <img src="~/Content/ParniCistic/Images/SC1020.jpg" alt="Kärcher SC 1020" width="300" />
+
+        <h3>Technické údaje</h3>
+        <table width="300">
+            <tr><td>Napájecí napětí</td><td>230 V</td></tr>
+            <tr><td>Příkon topení</td><td>1500 W</td></tr>
+            <tr><td>Objem nádrže</td><td>1 l</td></tr>
+            <tr><td>Množství páry</td><td>regulovatelné</td></tr>
+            <tr><td>Max. tlak páry</td><td>3,2 bar</td></tr>
+        </table>
+        <br />
+        <a href="~/Content/ParniCistic/Data/SC1020_manual.pdf">Návod ke stažení zde [SC1020_manual.pdf]</a>
+    </div>
+</div>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <iframe width="350" height="200" src="https://www.youtube.com/embed/0pPpOyJM02I" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div class="col-md-4">
+        <iframe width="350" height="200" src="https://www.youtube.com/embed/c_Y-CD-Pvp0" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div class="col-md-4">
+        <iframe width="350" height="200" src="https://www.youtube.com/embed/JnP6emEGBws" frameborder="0" allowfullscreen></iframe>
+    </div>
+</div>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Podmínky pronájmu</h2>
+        <p>Parní čistič pronajímám na základě rezervace v kalendáři vpravo<br />anebo na telefoním čísle +420 734 580 323.</p>
+        <p>Poplatek za pronájem je 200 Kč na den.</p>
+        <p>Vratná kauce je stanovena na 500 Kč a vybírá se při převzetí čističe.</p>
+        <p>Parní čistič se vyzvedává a vrací osobně na adrese Slévačská 905, Praha 9.</p>
+        <p>Bližší informace a návrh smlouvy o pronájmu Vám přijde e-mailem po vytvořeni rezervace.</p>
+    </div>
+    <div class="col-md-4">
+        @if (!HttpContext.Current.IsDebuggingEnabled)
+        {
+            <h2>Rezervace</h2>
+        }
+        <p style="text-align:center; width:300px">
+            <img id="prev-month" class="calendar-controls" data-year="@Model.ViewMonth.AddMonths(-1).Year" data-month="@Model.ViewMonth.AddMonths(-1).Month" src='@Url.Content("~/Content/ParniCistic/Images/arrow-left.png")' />
+            <span id="actual-month" style="text-align:center; width:150px; display: inline-block">
+                @Model.GetMonthYear()
+            </span>
+            <img id="next-month" class="calendar-controls" data-year="@Model.ViewMonth.AddMonths(1).Year" data-month="@Model.ViewMonth.AddMonths(1).Month" src='@Url.Content("~/Content/ParniCistic/Images/arrow-right.png")' />
+        </p>
+
+        <div id="calendar">
+            @Model.ToHtml()
+        </div>
+
+    </div>
+</div>
+
+
+<div id="create-reservation-dialog" class="ui-dialog-content reservation-dialog" style="display:none">
+    @Html.Partial("_CreateReservation", Model.ResAt(0))
+</div>
+
+<div id="delete-reservation-dialog" class="ui-dialog-content reservation-dialog" style="display:none">
+    @Html.Partial("_DeleteReservation", Model.ResAt(0))
+</div>

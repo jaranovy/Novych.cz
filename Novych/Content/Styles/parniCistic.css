@@ -1,0 +1,58 @@
+﻿/* Set width on the form input elements since they're 100% wide by default */
+
+/*input,
+select,
+textarea {
+    max-width: 280px;
+}
+    */
+
+.day {
+    text-align: center;
+    vertical-align: bottom;
+}
+
+.open-dialog {
+    cursor: pointer;
+}
+
+.today {
+    font-weight: bold;
+    border-radius: 50%;
+    background: #fef448;
+}
+
+.weekend {
+    background: #d6f2fc;
+}
+
+.tableHeader {
+    background: #eeeeee;
+}
+
+.reserved {
+    border-radius: 50%;
+    background: #f7ceb6;
+}
+
+.anotherMonth {
+    color: #b6b5b4;
+}
+
+.hidden {
+    display: none;
+}
+
+.no-close-button-dialog .ui-dialog-titlebar-close {
+    display: none;
+}
+
+.calendar-controls {
+    cursor: pointer;
+    width: 25px;
+    height: 10px;
+}
+
+.row {
+    padding-bottom: 5px;
+}

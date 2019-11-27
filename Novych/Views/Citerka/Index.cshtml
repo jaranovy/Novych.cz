@@ -1,0 +1,186 @@
+﻿@model Novych.Models.NoteModel
+
+@{
+    ViewBag.Title = "GeNoPoCi";
+    Layout = "~/Views/Shared/_LayoutCiterka.cshtml";
+}
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "GeNoPoCiForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div id="header">
+        <h1 align="center">Generátor Notových Podkladů pro Citerku</h1>
+    </div>
+
+    <div id="generator">
+        @Html.ValidationSummary(true)
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.HeaderString, new { @class = "control-label" })
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.HeaderString, new { @class = "class100width" })
+                    @Html.ValidationMessageFor(model => model.HeaderString)
+                </div>
+            </div>
+
+            <div class="row classHidden">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.NotesString, new { @class = "control-label" })
+                </div>
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.NotesString, new { @class = "class100width SubmitEnter" })
+                    @Html.ValidationMessageFor(model => model.NotesString)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <label class="control-label" for="tonesDiv">Noty: <span id="notesCounter" class="notesCounter">(0/60)</span></label>
+                </div>
+                <div class="col-md-10">
+                    <div tabindex="0" id="tonesDiv" data-id="0" data-count="0">
+                        <div id="spacerId_0" class="divSpacers spacerSelected">&nbsp;</div>
+                    </div>
+                    <span id="tonesDiv_valMsg" class="field-validation-error"></span>
+                </div>
+            </div>
+
+            <div id="dot" class="dot classHidden">&nbsp;</div>
+
+            <div class="row">
+                <div class="col-md-2" ></div>
+                <div class="col-md-10">
+                    <table id="keyboardTable">
+                        <tr height="70px">
+                            <td id="key_G1" data-tone="G1" data-length="short" class="keys toneColor_G1">G1</td>
+                            <td id="key_A1" data-tone="A1" data-length="short" class="keys toneColor_A1">A1</td>
+                            <td id="key_H1" data-tone="H1" data-length="short" class="keys toneColor_H1">H1</td>
+                            <td id="key_C2" data-tone="C2" data-length="short" class="keys toneColor_C2">C2</td>
+                            <td id="key_D2" data-tone="D2" data-length="short" class="keys toneColor_D2">D2</td>
+                            <td id="key_E2" data-tone="E2" data-length="short" class="keys toneColor_E2">E2</td>
+                            <td id="key_FIS2" data-tone="FIS2" data-length="short" class="keys toneColor_FIS2">FIS2</td>
+                            <td id="key_G2" data-tone="G2" data-length="short" class="keys toneColor_G2">G2</td>
+                            <td id="key_A2" data-tone="A2" data-length="short" class="keys toneColor_A2">A2</td>
+                            <td id="key_H2" data-tone="H2" data-length="short" class="keys toneColor_H2">H2</td>
+                            <td id="key_C3" data-tone="C3" data-length="short" class="keys toneColor_C3">C3</td>
+                            <td id="key_D3" data-tone="D3" data-length="short" class="keys toneColor_D3">D3</td>
+                            <td id="key_E3" data-tone="E3" data-length="short" class="keys toneColor_E3">E3</td>
+                            <td id="key_FIS3" data-tone="FIS3" data-length="short" class="keys toneColor_FIS3">FIS3</td>
+                            <td id="key_G3" data-tone="G3" data-length="short" class="keys toneColor_G3">G3</td>
+                            <td class="keySpace">&nbsp;</td>
+                            <td id="key_X" data-tone="X" data-length="short" class="keys toneColor_X">X</td>
+                            <td id="key_del" data-tone="DEL" data-length="short" class="keys toneColor_DEL">Del</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.FooterString, new { @class = "control-label" })
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.FooterString, new { @class = "class100width" })
+                    @Html.ValidationMessageFor(model => model.FooterString)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    <table style="margin-left:auto; margin-right:auto">
+                        <tr>
+                            <td><input type="submit" value="Generuj" class="btn btn-default btn-center btn-generate" /></td>
+                            <td><input id="btn-play" type="button" value="Přehraj vše" onclick="playAll();" class="btn btn-default btn-center btn-play" /></td>
+                            <td><input type="button" value="Smaž vše" onclick="erase();" class="btn btn-default btn-center btn-erease" /></td>
+                            <td><input type="button" value="Nápověda" onclick="help();" class="btn btn-default btn-center btn-help" /></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="image">
+        <h2 align="center">Notový podklad</h2>
+        <img id="imageImg" width="673" height="476" alt="Notový podklad" src="@Model.ImageDataURL" />
+    </div>
+
+    <div id="notesHistory">
+        <h2 align="center">Noty k písním</h2>
+        <table id="notesTable" class="table-striped class100width">
+            <tr>
+                <th width="150px">Název</th>
+                <th>Noty</th>
+                <th width="200px">Popis</th>
+            </tr>
+
+            @if (Model.Songs != null)
+            {
+                foreach (var song in Model.Songs)
+                {
+                    <tr id="Link_@song.ID" class="songLink">
+                        <td id="HeaderText_@song.ID">@song.HeaderText</td>
+                        <td id="Notes_@song.ID">@song.Notes</td>
+                        <td id="FooterText_@song.ID">@song.FooterText</td>
+                    </tr>
+                }
+            }
+
+        </table>
+    </div>
+
+    <div id="help">
+        <h2 align="center">Nápověda</h2>
+
+        <p>Vyťukejte noty a stiskněte tlačítko "Generuj". Vygenerovaný "Notový podklad" si můžete uložit, když na něj kliknete pravým tlačítkem a vyberete "Uložit obrázek jako". Aby podklad pasoval do Citerky, je nutné ho vytisknout na papír velikosti A4 bez okrajů. </p>
+        <p>Vygenerováním Notvého podkladu souhlasíte se zveřejněním v Seznamu písní výše.</p>
+        <br />
+
+        <table id="helpTable" class="table-striped class100width">
+            <tr>
+                <th width="200px">Klávesa</th>
+                <th>Popis</th>
+            </tr>
+            <tr>
+                <td><div class="divTones toneColor_G2 lengthTone_short">G2</div></td>
+                <td>Krátký tón (plné kolečko v Notovém podkaldu)</td>
+            </tr>
+            <tr>
+                <td><div class="divTones toneColor_G2 lengthTone_long">G2</div></td>
+                <td>Dlouhý tón (prázdné kolečko v Notovém podkladu)</td>
+            </tr>
+            <tr>
+                <td><div class="divTones toneColor_X lengthTone_short">X</div></td>
+                <td>Oddělovač skupin not (nevykreslí se spojnice mezi notama v Notovém podkladu)</td>
+            </tr>
+            <tr>
+                <td><div class="divTones toneColor_X lengthTone_short">Del</div></td>
+                <td>Smaže se poslední nota za kurzorem</td>
+            </tr>
+            <tr>
+                <td>Šipky, Home, End</td>
+                <td>Pohyb kurzoru</td>
+            </tr>
+            <tr>
+                <td>Delete, BackSpace</td>
+                <td>Smazaní noty</td>
+            </tr>
+        </table>
+    </div>
+
+    @*
+        <div id="log">
+            <h2 align="center">Log</h2>
+            <textarea rows="20" id="logArea">@Html.Raw(@Model.Log)</textarea>
+        </div>
+    *@
+
+}

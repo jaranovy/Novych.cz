@@ -1,0 +1,38 @@
+﻿<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+    @Html.ActionLink("Nových.cz", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+
+            <!--
+            <li class="nav-item active">
+                @Html.ActionLink("Jara", "Index", "Jara", null, new { @class = "nav-link" })
+            </li>
+                        -->
+            <!--
+            <li class="nav-item active">
+                @Html.ActionLink("Mirka", "Index", "Mirka", null, new { @class = "nav-link" })
+            </li>
+
+            <li class="nav-item active">
+                @Html.ActionLink("Výrobky", "Index", "Vyrobky", null, new { @class = "nav-link" })
+            </li>
+            -->
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Projekty
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    @Html.ActionLink("Generátor pro Citerku", "Index", "Citerka", null, new { @class = "nav-link" })
+                    @Html.ActionLink("Pronájem Parního Čističe", "Index", "ParniCistic", null, new { @class = "nav-link" })
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div style="width:100%; padding-bottom:20px"></div>

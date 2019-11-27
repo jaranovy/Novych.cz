@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>@ViewBag.Title - Novych.cz</title>
+
+    @Styles.Render("~/bundles/tether-css")
+    @Styles.Render("~/bundles/bootstrap-css")
+    @Styles.Render("~/bundles/site-css")
+    @Styles.Render("~/bundles/citerka-css")
+    @Styles.Render("~/bundles/cookiealert-css")
+    @Scripts.Render("~/bundles/modernizr-js")
+
+    @Scripts.Render("~/bundles/jquery-js")
+    @Scripts.Render("~/bundles/jqueryval-js")
+    @Scripts.Render("~/bundles/tether-js")
+    @Scripts.Render("~/bundles/bootstrap-js")
+    @Scripts.Render("~/bundles/respond-js")
+    @Scripts.Render("~/bundles/site-js")
+    @Scripts.Render("~/bundles/wad-js")
+    @Scripts.Render("~/bundles/citerka-js")
+    @Scripts.Render("~/bundles/cookiealert-js")
+    @RenderSection("scripts", required: false)
+
+</head>
+<body>
+    @Html.Partial("_Menu")
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    @Html.Partial("_Footer")
+
+    @Html.Partial("_Cookie")
+
+</body>
+</html>

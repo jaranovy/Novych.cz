@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Vyrobky</h2>
+
+@Html.ActionLink("Geoboard", "Geoboard", "Vyrobky", null, new { hidefocus = "hidefocus" })
+
+@Html.ActionLink("Myška a sýr", "MyskaSyr", "Vyrobky", null, new { hidefocus = "hidefocus" })
+
